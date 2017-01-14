@@ -1,0 +1,249 @@
+#include <iostream>
+
+using namespace std;
+typedef int myarray[100];
+
+//FUNCTION TO INSERT INTS INTO THE ARRAY//
+int build_array(int* intarray,int* intarray_original,int counter)
+{
+
+
+	int user_number;                                                    //int to hold the user's value
+	cout << "Enter integer to place into the array (-999 to exit) : ";
+	cin >> user_number;                                                 //accepting user input
+
+	while (user_number != -999)                                         //while statement to determine when to terminate loop
+	{
+		intarray[counter] = user_number; 
+		intarray_original[counter] = user_number;						   //placing the user's value into appropiate index location
+		counter++;														  //incrementing counter 
+		cout << "Enter integer to place into the array (-999 to exit) : ";
+		cin >> user_number;                                                //prompting user once more to enter a value	
+	}
+
+
+	return counter;
+}
+//----------------------------------//
+
+//FUNCTION TO PRINT THE ORIGINAL ARRAY W/O SORTING//
+void print_array(int* intarray_original,int counter,bool quicksort)
+{
+	if (counter == 0)
+	{
+		cout << "The array is empty \n";
+		return;
+	}
+	if (quicksort == true)
+	{
+		for (int i = 1; i <= counter; i++)
+		{
+			cout << intarray_original[i] << " ";
+		}
+	}
+	else if (quicksort == false)
+	{
+		for (int i = 0; i < counter; i++)
+		{
+			cout << intarray_original[i] << " ";
+		}
+	}
+}
+//-----------------------------------------------//
+
+
+//FUNCTION FOR SELECTION SORT//
+void selection_sort(int* intarray, int counter)
+{
+	int i = 0, j = 0;
+
+
+	for (j = 0; j < counter - 1; j++)
+	{
+
+		int iMin = j;
+
+		for (i = j + 1; i < counter; i++) {
+
+			if (intarray[i] < intarray[iMin]) {
+
+				iMin = i;
+			}
+		}
+
+		if (iMin != j)
+		{
+			int temp_j = intarray[j];
+			int temp_min = intarray[iMin];
+			intarray[j] = temp_min;
+			intarray[iMin] = temp_j;
+		}
+	}
+	int walk = 0;
+	cout << "The array sorted via selection sort is: ";
+	while (walk < counter)
+	{
+		cout << intarray[walk] << " ";
+		walk++;
+	}
+}
+//------------------------//
+
+
+//INSERTION SORT//
+
+void insertion_sort(int* intarray, int counter) {
+	int j, temp;
+
+	for (int i = 0; i < counter; i++) {
+		j = i;
+
+		while (j > 0 && intarray[j] < intarray[j - 1]) {
+			temp = intarray[j];
+			intarray[j] = intarray[j - 1];
+			intarray[j - 1] = temp;
+			j--;
+		}
+	}
+	int walk = 0;
+	cout << "The array sorted via insertion sort is: ";
+	while (walk < counter)
+	{
+		cout << intarray[walk] << " ";
+		walk++;
+	}
+}
+//--------------------------//
+
+
+//FUNCTION FOR BUBBLE SORT//
+void bubble_sort(int* intarray, int counter)
+{
+	int i = 0, j = 0;
+
+
+	for (i = 0; i < counter; i++)
+
+		for (j = i + 1; j < counter; j++)
+
+			if (intarray[j] < intarray[i])
+
+
+			{
+
+				int bub;
+
+				bub = intarray[i];
+
+				intarray[i] = intarray[j];
+
+				intarray[j] = bub;
+
+			}
+
+	int walk = 0;
+	cout << "The array sorted via insertion sort is: ";
+	while (walk < counter)
+	{
+		cout << intarray[walk] << " ";
+		walk++;
+	}
+}
+//------------------------------------//
+
+
+
+//FUNCTION FOR QUICKSORT//
+void quicksort(int* intarray, int left, int counter) {
+
+	int right = counter;
+	int i = left, j = right;
+	int tmp;
+	int pivot = intarray[(left+(right - left) / 2)];
+
+
+	while (i <= j) {
+		while (intarray[i] < pivot)
+			i++;
+		while (intarray[j] > pivot)
+			j--;
+		if (i <= j) {
+			tmp = intarray[i];
+			intarray[i] = intarray[j];
+			intarray[j] = tmp;
+			i++;
+			j--;
+		}
+	}
+
+	if (left < j)
+	{
+		quicksort(intarray, left, j);
+	}
+	if (i < right)
+	{
+		quicksort(intarray, i, right);
+	}
+
+}
+//-----------------------------------//
+
+int main()
+{
+	char menuchoice;
+	int counter = 0;
+	int *intarray = new myarray;          
+	int *intarray_original = new myarray;
+	cout << "--Array Sort Program--\n";
+	cout << "(A) Insert integers into the array\n";
+	cout << "(B) Print array w/o any sorting\n";
+	cout << "(C) Selection sort\n";
+	cout << "(D) Insertion sort\n";
+	cout << "(E) Bubble sort\n";
+	cout << "(F) Quicksort\n";
+	cout << "(Q) to exit without printing the queue\n";
+
+	do {                                          //WHILE STATEMENT FOR USER INPUT
+		cout << "\nEnter selection: ";
+		cin >> menuchoice;
+		menuchoice = (char)toupper(menuchoice);   //MAKING INPUT UPPERCASE
+		switch (menuchoice)                       //BEGIN SWITCH
+	       {
+
+			case'A':                                  //case to insert a value into the array
+				counter = build_array(intarray, intarray_original, counter);//saving our updated counter & calling the build function to insert integers
+
+				break;
+
+			case'B':                                      //case to print the array w/o any sorting
+				cout << "The array without sorting is: \n";
+				print_array(intarray_original, counter,false);           //calling print function
+				break;
+			case'C':
+				selection_sort(intarray, counter);
+				break;
+			case'D':
+				insertion_sort(intarray, counter);
+				break;
+			case'E':
+				bubble_sort(intarray, counter);
+				break;
+			case'F':
+
+
+				cout << "The array sorted via quicksort sort is: ";
+				quicksort(intarray, 0, counter-1);
+				print_array(intarray, counter,false);
+				break;
+			default:
+				cout << "\nInvalid input\n\n";
+			}
+		  } while (menuchoice != 'Q');                  //if q is entered exit the program
+	
+	
+
+	delete[] intarray;
+	delete[] intarray_original;
+	return 0;
+
+}
