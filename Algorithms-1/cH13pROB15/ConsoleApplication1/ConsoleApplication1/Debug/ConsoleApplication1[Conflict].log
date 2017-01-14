@@ -1,0 +1,3 @@
+﻿  Source.cpp
+c:\users\alan\google drive\mckendree\classes\fall2016\algorithms\ch13prob15\consoleapplication1\consoleapplication1\source.cpp(110): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  ConsoleApplication1.vcxproj -> C:\Users\Alan\Google Drive\McKendree\Classes\Fall2016\Algorithms\cH13pROB15\ConsoleApplication1\Debug\ConsoleApplication1.exe
