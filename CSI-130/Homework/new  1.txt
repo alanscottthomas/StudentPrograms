@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int acc[5] = { 0 }, ir[8] = { 0 }, pc = 0, mdr[8] = { 0 }, mar[8] = { 0 }, mm[256][8] = { { 0 } }, opcode = 0, operand = 0, i = 0, j = 0, pc_orig = 0, blank = 0;
+
+	//Printing the menu options for the user
+	cout << "Below are you options for the central processor simulator." << endl;
+	cout << "Enter a '0' to HALT" << endl;
+	cout << "Enter a '1' to LOAD IMMEDIATE" << endl;
+	cout << "Enter a '2' to STORE DIRECT" << endl;
+	cout << "Enter a '3' to LOAD INDRECT" << endl;
+	cout << "Enter a '4' to STORE INDIRECT" << endl;
+	cout << "Enter a '5' to ADD" << endl;
+	cout << "Enter a '6' to COMPARE" << endl;
+	cout << "Enter a '7' to JMPNE" << endl << "Enter OPCODE: ";
+	//Getting opcode from user
+	cin >> opcode;
+	//getting operand from user
+	cout << "Enter OPERAND: ";
+	cin >> operand;
+
+	while (opcode != 0)
+	{
+		//opcode to binary and store to mm
+		i = 2;
+		for (i = 2; i >= 0; i = i - 1)
+		{
+			mm[pc][i] = opcode % 2;
+			opcode = opcode / 2;
+		}
+		//operand to binary and store to mm
+		i = 7;
+		for (i = 7; i >= 3; i = i - 1)
+		{
+			mm[pc][i] = operand % 2;
+			operand = operand / 2;
+		}
+		pc = pc + 1;
+
+		cout << "Enter OPCODE: ";
+		//Getting opcode from user
+		cin >> opcode;
+		//getting operand from user
+		cout << "Enter OPERAND: ";
+		cin >> operand;
+	}
+
+
+	//prompting user to press a key to prin mm
+	system("PAUSE");
+	//using pc_orig as to not overwrite actual PC value
+	//printing main memory
+	pc_orig = pc;
+	for (pc_orig = 0; pc_orig < 256; pc_orig = pc_orig + 1)
+	{
+		cout << endl << "LN#" << j << " in MM: ";
+		j = j + 1;
+		for (i = 0; i < 8; i = i + 1)
+			cout << mm[pc_orig][i];
+	}
+	cout << endl;
+
+
+	j = 0;
+	cin >>blank ;
+	cin.get();
+}
