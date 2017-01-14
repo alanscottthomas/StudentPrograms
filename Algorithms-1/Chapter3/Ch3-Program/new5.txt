@@ -1,0 +1,319 @@
+#include <iostream>
+using namespace std;
+
+/*
+10-13 graph is complete..next, figure out how to search it..
+
+*/
+
+
+struct NODE
+{
+	
+	int data;
+	NODE* left;
+	NODE* middle;
+	NODE* right;
+};
+
+//FUNCTION TO HARD-CODE TREE AS DEMONSTRATED DURING LECTURE//
+void SEARCH(NODE* node)
+{
+	cout << "\n\n\n" << node->data << " " << node->left->data << " " << node->left->left->data << " " << node->left->left->left->data << " " << node->left->left->middle->data;
+}
+
+/*void POP(NODE** node, int* nodenumber)
+{
+	NODE* pDlt;
+	pDlt = *node;
+
+	bool success;
+
+
+
+
+	if (*node)
+	{
+		if (pDlt->left != NULL && pDlt->middle == NULL)
+		{
+			success = true;
+			*nodenumber = (*node)->data;
+			pDlt = *node;
+			*node = (*node)->left;
+			cout << pDlt->data;
+			free(pDlt);
+		}
+
+		
+		
+			 if (pDlt->left != NULL && pDlt->middle != NULL)
+			{
+				success = true;
+				*nodenumber = (*node)->data;
+				pDlt = *node;
+				*node = (*node)->left;
+				cout << pDlt->data;
+				free(pDlt);
+			}
+
+
+
+
+
+		else
+		{
+			success = false;
+		}
+	}
+}
+
+*/
+
+void PRINT(NODE** node) {
+	NODE* temp = *node;
+	
+
+	while (temp->left != NULL) 
+	{
+		cout << temp -> data;
+		temp = temp->left;
+	}
+
+}
+
+
+void INSERT()
+{
+	NODE* node;
+	node = new NODE;
+	bool FIRST = true;
+	NODE* current;
+	current = new NODE;
+
+
+	if (FIRST) {
+		NODE* next;
+		next = new NODE;
+
+		next->data = 1;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		node = next;
+		current = next;
+		cout << "START: " << next->data << " ";
+		FIRST = false;
+
+
+
+	}
+	if (!FIRST)
+	{
+
+		NODE* next;
+		next = new NODE;
+		next->data = 2;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		//BP_3//
+		NODE* BP_3;
+		BP_3 = new NODE;
+		next = new NODE;
+		BP_3 = next;
+		next->data = 3;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << "(BP) ";
+
+
+		next = new NODE;
+		next->data = 4;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		//BP_5//
+		NODE* BP_5;
+		BP_5 = new NODE;
+		next = new NODE;
+		BP_5 = next;
+		next->data = 5;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << "(BP) ";
+
+		next = new NODE;
+		next->data = 6;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		//END NODE//
+		next = new NODE;
+		next->data = 7;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = BP_5;
+		cout << next->data << "(END) ";
+
+		//END NODE//
+		next = new NODE;
+		next->data = 8;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->middle = next;
+		current = next;
+		current = BP_5;
+		cout << next->data << "(END) ";
+
+		next = new NODE;
+		next->data = 9;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->right = next;
+		current = next;
+		cout << next->data << " ";
+
+		next = new NODE;
+		next->data = 10;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		//END NODE//
+		next = new NODE;
+		next->data = 11;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = BP_3;
+		cout << next->data << " ";
+
+		next = new NODE;
+		next->data = 12;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->middle = next;
+		current = next;
+		cout << next->data << " ";
+
+
+		//BP_13//
+		NODE* BP_13;
+		BP_13 = new NODE;
+		next = new NODE;
+		BP_13 = next;
+		next->data = 13;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << "(BP) ";
+
+		next = new NODE;
+		next->data = 14;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		next = new NODE;
+		next->data = 15;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " ";
+
+		//END NODE-WANT TO SEEK THIS NODE//
+		next = new NODE;
+		next->data = 16;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = BP_13;
+		cout << next->data << "(END & GOAL) ";
+
+
+		next = new NODE;
+		next->data = 17;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->middle = next;
+		current = next;
+		cout << next->data << " ";
+
+		next = new NODE;
+		next->data = 18;
+		next->left = NULL;
+		next->middle = NULL;
+		next->right = NULL;
+		current->left = next;
+		current = next;
+		cout << next->data << " (END OF GRAPH) ";
+
+
+
+	}
+
+	PRINT(&node);
+
+
+	/*for (int counter = 0; counter < 17; counter++)
+	{
+
+		POP(&node, &node->data);
+		//SEARCH(node);
+	}*/
+}
+//--------------------------------//
+
+
+
+
+//BEGIN EXECUTION//
+int main()
+{
+
+	INSERT();
+	cout << "\n\n\n";
+
+
+
+	system("pause");
+
+	return 0;
+}
+//---------------//

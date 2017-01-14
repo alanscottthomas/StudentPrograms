@@ -1,0 +1,188 @@
+#include <iostream>
+#include <string>
+#include<stdio.h>
+#include<stdbool.h>
+using namespace std;
+
+typedef struct node
+{
+	void* dataPtr;
+	struct node* left;
+	//struct node* middle;
+	//struct node* right;
+}STACK_NODE;
+
+typedef struct
+{
+	int count;
+	STACK_NODE* top;
+}STACK;
+
+
+
+
+//CREATE EMPTY STACK FUNCTION//
+STACK* createStack(void)
+{
+	STACK* stack;
+
+	stack = new STACK;
+
+	if (stack)
+	{
+		stack->count = 0;
+		stack->top = NULL;
+	}
+	return stack;
+}
+//--------------------------------//
+
+//FUNCTION TO PUSH ITEM TO THE STACK//
+bool pushStack(STACK* stack, void* dataInPtr)
+{
+STACK_NODE* newPtr;
+
+newPtr = new STACK_NODE;
+if (!newPtr)
+{//book code doesn't have braces, may need to remove these
+	//will probably neeed if statments here to determine what direction/end/branch
+	return false;
+}
+newPtr->dataPtr = dataInPtr;
+newPtr->left = stack->top;
+stack->top = newPtr;
+
+(stack->count)++;
+return true;
+
+}
+//----------------------------------------//
+
+//FUNCTION TO POP AN ITEM FROM THE TOP OF THE STACK//
+void* popStack(STACK* stack)
+	{
+void* dataOutPtr;
+STACK_NODE* temp;
+
+	if (stack->count == 0)
+		{//these braces not in the book code
+		dataOutPtr = NULL;
+	}
+
+	else
+	{
+		temp = stack->top;
+		dataOutPtr = stack->top->dataPtr;
+		stack->top = stack->top->left;
+		free(temp);
+		(stack->count)--;
+	}
+return dataOutPtr;
+	}
+//----------------------------//
+
+//RETRIEVE TOP OF STACK FUNCTION//
+void* stackTop(STACK* stack)
+	{
+		if (stack->count == 0)
+			{
+				return NULL;
+			}
+		else
+			{
+				return stack->top->dataPtr;
+			}
+	}
+//------------------------------//
+
+//FUNCTION TO DETERMINE IF THE STACK IS CURRENTLY EMPTY//
+bool emptyStack(STACK* stack)
+{
+	return(stack->count == 0);
+}
+//--------------------//
+
+//FULL STACK FUNCTION TO DETERMINE IF THE HEAP IS FULL//
+bool fullStack(STACK* stack)
+	{
+		STACK_NODE* temp;
+		temp = new STACK_NODE;
+
+		if ((temp = (STACK_NODE*)malloc(sizeof(*(stack->top))))) //slightly confused by this line
+			{
+				free(temp);
+				return false;
+			}
+		return true;
+}
+//------------------------//
+
+//STACK COUNT FUNCTION TO RETURN NUMBER OF ITEMS IN THE STACK//
+int stackCount(STACK* stack)
+	{
+		return stack->count;
+	}
+//------------------------------------//
+
+
+//DESTORY STACK FUNCTION TO FREE UP THE MEMORY THAT THE STACK WAS USING//
+STACK* destroyStack(STACK* stack)
+{
+	STACK_NODE* temp;
+	temp = new STACK_NODE;
+
+		if (stack)
+			{
+				while (stack->top != NULL)
+					{
+						free(stack->top->dataPtr);
+
+						temp = stack->top;
+						stack->top = stack->top->left;
+						free(temp);
+					}
+				free(stack);
+			}
+		return NULL; //deleting the stack
+}
+//--------------------//
+
+int main()
+{
+	bool done = false;
+	int* dataPtr;
+	STACK* stack;
+	stack = new STACK;
+	stack = createStack();
+
+	while (!done)
+	{
+		dataPtr = (int*)malloc(sizeof(int));
+		printf("Enter a number:<EOF> to halt  ");
+		if ((scanf("&d", dataPtr)) == EOF || (fullStack(stack)))
+		{
+			done = true;
+		}
+
+		else
+		{
+			pushStack(stack, dataPtr);
+		}
+
+		while (!emptyStack(stack))
+		{
+			dataPtr = (int*)popStack(stack);
+			printf("%3d\n", *dataPtr);
+			free(dataPtr);
+		}
+
+		destroyStack(stack);
+		system("pause");
+		
+
+
+
+}
+	return 0;
+
+}

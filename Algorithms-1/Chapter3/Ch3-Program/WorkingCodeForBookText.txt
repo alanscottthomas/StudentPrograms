@@ -1,0 +1,276 @@
+#include <iostream>
+using namespace std;
+
+
+/*
+Done
+10/10 - Made characters display ints
+
+Todo
+10/11 - Figure out how to branch off from nodes. Continue working on the program.
+
+*/
+
+
+
+//STRUCTURE FOR NODE//
+typedef struct node
+{
+	void* dataPtr;
+	char data;
+	struct node* middle; //place holder
+	struct node* left;
+	struct node* right;
+}STACK_NODE;
+//----------------//
+
+
+//STRUCTURE FOR STACK//
+typedef struct
+{
+	int count;
+	STACK_NODE* top;
+}STACK;
+//---------------//
+
+
+
+
+//BOOl PUSH FUNCTION//
+bool push(STACK_NODE** pStackTop, char charIn)
+{
+	STACK_NODE* pNew;
+	bool success;
+
+	pNew = (STACK_NODE*)malloc(sizeof(STACK_NODE));
+	if (!pNew)
+	{
+		success = false;
+	}
+	else
+	{
+		pNew->data = charIn;
+		pNew->middle = *pStackTop; //will need to work on this for the branch system
+
+		*pStackTop = pNew;
+		success = true;
+	}
+	return success;
+}
+//----------------------------//
+
+
+//BOOL POP FUNCTION//
+bool pop(STACK_NODE** pStackTop, char* charOut)
+{
+	STACK_NODE* pDlt;
+	bool success;
+
+	if (*pStackTop)
+	{
+		success = true;
+		*charOut = (*pStackTop)->data;
+		pDlt = *pStackTop;
+		*pStackTop = (*pStackTop)->middle;
+		free(pDlt);
+	}
+	else
+	{
+		success = false;
+	}
+	return success;
+}
+//-------------------------//
+
+
+//PRINT STACK FUNTION TO PRINT CONTENTS OF THE STACK//
+void print(STACK_NODE** pStackTop)
+{
+	char printData;
+
+	printf("Stack Contained:    ");
+	while (pop(pStackTop, &printData))
+	{//these braces aren't in the text
+		printf("%d ", printData);
+
+	}
+	return;
+}
+//---------------------------------//
+
+
+
+
+//STRUCTURE TO CREATE AN EMPTY STACK//
+/*STACK* createStack(void)
+{
+	STACK* stack;
+
+	stack = (STACK*)malloc(sizeof(STACK)); //could use new here, but trying to stick to the presribed code as close as possible
+	if (stack)
+	{
+		stack->count = 0;
+		stack->top = NULL;
+	}
+	return stack;
+}
+//---------------------------//*/
+
+
+
+
+//FUNCTION TO PUSH ITEM TO THE STACK//
+/*bool pushStack(STACK* stack, void* dataInPtr)
+{
+	STACK_NODE* newPtr;
+
+	newPtr = (STACK_NODE*)malloc(sizeof(STACK_NODE));
+	if (!newPtr)
+	{//book code doesn't have braces, may need to remove these
+		return false;
+		newPtr->dataPtr = dataInPtr;
+		newPtr->middle;
+
+		(stack->count)++;
+		return true;
+	}
+}
+//----------------------------------------//*/
+
+
+
+
+//FUNCTION TO POP AN ITEM FROM THE TOP OF THE STACK//
+/*void* popStack(STACK* stack)
+{
+	void* dataOutPtr;
+	STACK_NODE* temp;
+
+	if (stack->count == 0)
+	{//these braces not in the book code
+		dataOutPtr = NULL;
+	}
+
+	else
+	{
+		temp = stack->top;
+		dataOutPtr = stack->top->dataPtr;
+		stack->top = stack->top->middle;
+		free(temp);
+		(stack->count)--;
+	}
+	return dataOutPtr;
+}*/
+
+
+
+
+//FUNCTION TO RETRIEVE TOP STACK
+/*void* stackTop(STACK* stack)
+{
+	if (stack->count == 0)
+	{
+		return NULL;
+	}
+	else
+	{
+		return stack->top->dataPtr;
+	}
+}
+//------------------------------//*/
+
+
+//FUNCTION TO DETERMINE IF THE STACK IS CURRENTLY EMPTY//
+/*bool emptyStack(STACK* stack)
+{
+	return(stack->count == 0);
+}
+//--------------------//*/
+
+
+
+
+//FULL STACK FUNCTION TO DETERMINE IF THE HEAP IS FULL//
+/*bool fullStack(STACK* stack)
+{
+	STACK_NODE* temp;
+
+	if ((temp = (STACK_NODE*)malloc(sizeof(*(stack->top))))) //slightly confused by this line
+	{
+		free(temp);
+		return false;
+	}
+	return true;
+}
+//------------------------//*/
+
+
+
+
+//STACK COUNT FUNCTION TO RETURN NUMBER OF ITEMS IN THE STACK//
+/*int stackCount(STACK* stack)
+{
+	return stack->count;
+}
+//------------------------------------//*/
+
+
+//DESTORY STACK FUNCTION TO FREE UP THE MEMORY THAT THE STACK WAS USING//
+/*STACK* destroyStack(STACK* stack)
+{
+	STACK_NODE* temp;
+
+	if (stack)
+	{
+		while (stack->top != NULL)
+		{
+			free(stack->top->dataPtr);
+
+			temp = stack->top;
+			stack->top = stack->top->middle;
+			free(temp);
+		}
+		free(stack);
+	}
+	return NULL; //deleting the stack
+}
+*/
+
+
+//INSERT DATA FUNCTION --- will need to alter this to help build the leaves
+void insertData(STACK_NODE** pStackTop)
+{
+	char charIn;
+	bool success;
+	//inserting random numbers into nodes//
+	printf("Creating characters:  ");
+	for (int nodeCount = 0; nodeCount < 10; nodeCount++)
+	{
+		charIn = rand() % 99 + 1;
+		printf("%d ", charIn);
+		success = push(pStackTop, charIn);
+		if (!success)
+		{
+			printf("Error 100: Out of Memory\n");
+			exit(100);
+		}
+	}
+	//-----------//
+	printf("\n");
+	return;
+}
+//--------------------------------------------//
+
+
+int main(void) {
+	STACK_NODE* pStackTop;
+
+	printf("Beginning Simple Stack Program\n\n");
+	pStackTop = NULL;
+	insertData(&pStackTop);
+	print(&pStackTop);
+
+	printf("\n\nEnd Simple Stack Program\n");
+	system("PAUSE");
+	return 0;
+}

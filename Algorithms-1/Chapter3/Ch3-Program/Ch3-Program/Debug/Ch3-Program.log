@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\alan\google drive\mckendree\classes\fall2016\algorithms\chapter3\ch3-program\ch3-program\source.cpp(60): warning C4715: 'pushStack': not all control paths return a value
+  Ch3-Program.vcxproj -> C:\Users\Alan\Google Drive\McKendree\Classes\Fall2016\Algorithms\Chapter3\Ch3-Program\Debug\Ch3-Program.exe
+  Ch3-Program.vcxproj -> C:\Users\Alan\Google Drive\McKendree\Classes\Fall2016\Algorithms\Chapter3\Ch3-Program\Debug\Ch3-Program.pdb (Full PDB)
