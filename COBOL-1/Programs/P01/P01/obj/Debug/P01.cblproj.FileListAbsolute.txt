@@ -1,0 +1,5 @@
+E:\CSI150\P01\P01\bin\Debug\P01.exe
+E:\CSI150\P01\P01\bin\Debug\P01.pdb
+E:\CSI150\P01\P01\obj\Debug\P01.cblprojResolveAssemblyReference.cache
+E:\CSI150\P01\P01\obj\Debug\P01.exe
+E:\CSI150\P01\P01\obj\Debug\P01.pdb
