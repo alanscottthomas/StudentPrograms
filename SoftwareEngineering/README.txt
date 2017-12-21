@@ -5,3 +5,5 @@ a SQL DB.
 To view the project goto the below site.
 
 alanthomas.ninja/thedepths
+
+All passwords have been changed in the DB before posting these files.
