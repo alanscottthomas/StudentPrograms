@@ -1,0 +1,113 @@
+<manifest alg="2" build="2018.0.0.379" opt="true" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster,textStyling" exportTarget="other" domain="www.alanthomas.ninja/thedepths" resolutions="1x" timestamp="1512536248350">
+  <folder name="css">
+    <file name="site_global.css" crc="3943330304"/>
+    <file name="help.css" crc="4258354287" ref="help"/>
+    <file name="index.css" crc="3815107128" ref="index"/>
+    <file name="game_help.css" crc="3866896738" ref="game_help"/>
+    <file name="splash.css" crc="12109933" ref="splash"/>
+    <file name="about.css" crc="3932036946" ref="about"/>
+  </folder>
+  <folder name="assets">
+    <file name="recording-(12).mp4" crc="4101278597" seo="true" mt="1510211499000"/>
+    <file name="recording-_12_.webm" crc="3950014455" seo="true" mt="1511683985000"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="209076791" ref="index:about:splash:help:game_help"/>
+    <file name="museutils.js" crc="3803043152" ref="index:about:splash:help:game_help"/>
+    <file name="whatinput.js" crc="86476730" ref="index:about:splash:help:game_help"/>
+    <file name="museconfig.js" crc="4153641093" ref="index:about:splash:help:game_help"/>
+    <file name="jquery.watch.js" crc="99325471" ref="index:about:splash:help:game_help"/>
+    <file name="require.js" crc="4157109226" ref="index:about:splash:help:game_help"/>
+    <file name="jquery.musepolyfill.bgsize.js" crc="4148998990" ref="help"/>
+    <file name="webpro.js" crc="242022427" ref="help"/>
+    <file name="musewpslideshow.js" crc="457073769" ref="help"/>
+    <file name="jquery.museoverlay.js" crc="483674903" ref="help"/>
+    <file name="touchswipe.js" crc="4066113679" ref="help"/>
+  </folder>
+  <folder name="images">
+    <file name="splatter_1.png" crc="498240196" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+      <caption webpage="index" alt=""/>
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="splatter_2.png" crc="4058200080" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="right_image.png" crc="4264021848" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="left_image.png" crc="3865381153" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+      <caption webpage="index" alt=""/>
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="wall_brick_texture_shadow_black_and_white_44987_3840x2400.jpg" crc="234730723" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="about.png" crc="482513876" seo="true" ref="about">
+      <caption webpage="about" alt=""/>
+    </file>
+    <file name="u974-4.png" crc="4173832387" ref="about"/>
+    <file name="builder.png" crc="4021547825" seo="true" ref="about">
+      <caption webpage="about" alt=""/>
+    </file>
+    <file name="u975-4.png" crc="516224369" ref="about"/>
+    <file name="chat.png" crc="3945743074" seo="true" ref="about">
+      <caption webpage="about" alt=""/>
+    </file>
+    <file name="u976-22.png" crc="4018017631" ref="about"/>
+    <file name="logo.png" crc="4281534541" seo="true" ref="splash">
+      <caption webpage="splash" alt=""/>
+    </file>
+    <file name="general_off.png" crc="52207908" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="general_on.png" crc="4023567982" ref="help">
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="map_maker_off.png" crc="3850930574" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="map_maker_on.png" crc="4142935803" ref="help">
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="movement_off.png" crc="144147445" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="movement_on.png" crc="487171864" ref="help">
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="combat_off.png" crc="4084824073" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="combat_on.png" crc="3835074021" ref="help">
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="help.jpg" crc="4238400824" ref="help:game_help">
+      <caption webpage="game_help" alt=""/>
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="map_maker_help.jpg" crc="4272103529" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="movement_help.jpg" crc="3792188670" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+    <file name="combat_help.jpg" crc="3967205504" ref="help">
+      <caption webpage="help" alt=""/>
+    </file>
+  </folder>
+  <file name="index.html" crc="489136489" seo="true" mt="1512379968127" redirect="true"/>
+  <file name="about.html" crc="473763379" seo="true" mt="1511682688560" redirect="true"/>
+  <file name="splash.html" crc="463740916" seo="true" mt="1511675189903" redirect="true"/>
+  <file name="help.html" crc="194717360" seo="true" mt="1512536238188" redirect="true"/>
+  <file name="game_help.html" crc="398559275" seo="true" mt="1512379146761" redirect="true"/>
+</manifest>
