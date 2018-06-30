@@ -1,0 +1,227 @@
+//Decryption of Feistel Cipher
+
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+#include<ctime>
+#include<bits/stdc++.h>
+using namespace std;
+
+char getChar(int []);
+
+
+
+
+//start main program//
+int main(){
+    ifstream input("cipherbits.txt");
+    if(!input){
+        cout<<"Bit File not found !";
+        return 1;
+    }
+
+    ifstream input2("key1.txt");
+    if(!input){
+        cout<<"Key File not found !";
+        return 1;
+    }
+
+
+    ifstream input3("key2.txt");
+    if(!input){
+        cout<<"Key File not found !";
+        return 1;
+    }
+
+
+
+
+
+    int length, num, bitarray[8];
+    string sentence;
+    char *ptr;
+    int *ptr1, *ptr2, counter=8, counter2=0, counter3=0, counter4=0, counter5=0, counter6=0, counter7=0;
+
+    int key1[12], key2[12];
+    int leftside[12], rightside[12];
+
+int round =0;
+while(round<2)
+{
+//Read bits into a sentence to determine the size of bits
+    getline(input, sentence);
+    length = sentence.size();
+
+    length=length/2;   // because there is a " " after each bit, which makes length twice as long as number of bits
+
+    input.clear();
+    input.seekg(0, ios::beg);
+
+    ptr = new char[length/8];
+    ptr1= new int[length];
+    ptr2= new int[length];
+
+
+
+
+//populate array ptr1 with bits. Note: Without gaps in between bits this will not be possible as they will be one massive number
+
+//may need to be changed in order to accomodate the changes in the ciphertext//
+
+       if(round==0)
+       {
+        while(input>>ptr1[counter2])    //getting size of ptr1
+            {
+                counter2++;
+            }
+       }
+
+
+       if(round==1)
+       {
+        while(ptr1[counter2]>>ptr1[counter2])    //getting size of ptr1
+            {
+                counter2++;
+            }
+       }
+
+
+
+
+
+
+//Read keys for XORing from key file
+    if(round==0)
+    {
+        while(input3>>key2[counter3])
+            {
+                counter3++;
+            }
+    }
+    else
+    {
+        while(input2>>key1[counter3])
+            {
+                counter3++;
+            }
+    }
+
+
+
+
+// ***************  DECRYPTION  *********************
+
+int code=1;    //even / odd to switch between arrays leftside and rightside
+
+//copy 12 bits into array leftside, place next 12 into array rightside, XOR with key1, then swap the two
+    for(int i=0;i<length;i++){
+        if(code%2!=0){
+            leftside[counter4] = ptr1[i];
+            counter4++;
+            if(counter4%12==0){    //array leftside is fully populated
+                counter4=0;
+                code++;  //code becomes even
+            }
+       }
+        else if(code%2==0){
+            rightside[counter4]=ptr1[i];
+            counter4++;
+                if(counter4%12==0){    //array rightside is fully populated
+                    for(int j=0;j<12;j++){
+                        if(round==0)
+                        {
+                            rightside[j]=rightside[j]^key2[j];    //key2 XOR| goes first due to order of encryption
+                        }
+                        else
+                        {
+                            rightside[j]=rightside[j]^key1[j];    //key1 XOR| goes last due to order of encryption
+                        }
+                    }
+
+                    //swap the two arrays when writing to array ptr2 to reverse the swapping done in encryption process
+
+                    for(int j=0;j<12;j++){
+                        ptr2[counter5]=rightside[j];
+                        counter5++;
+                    }
+
+                    for(int j=0;j<12;j++){
+                        ptr2[counter5]=leftside[j];
+                        counter5++;
+                    }
+                    counter4=0;
+                    code++;  // code becomes odd
+                }
+        }
+    }  // loop end -->
+
+
+    for(int i=0;i<length;i++){
+        bitarray[counter6]=ptr2[i];    //bitarray is an int array of size 8 to hold 8 bits at a time to convert back into ascii
+        counter6++;
+        if(counter6%8==0){             // bit array is fully populated
+            ptr[counter7]=getChar(bitarray);   //send bitarray to function getChar that convert bits into ascii, ascii is received into char array ptr
+            counter7++;
+            counter6=0;
+        }
+    }
+
+    if(round==1)
+    {
+        cout<<"The decrypted message is: ";
+    }
+//loop to print the unencrypted data//
+    for(int i=0;i<length/8;i++){
+        if(round==1)
+        {
+           cout<<(char)ptr[i];
+        }
+    }
+//------------------------------------------//
+
+
+counter5=0;
+counter7=0;
+counter6=0;
+counter4=0;
+counter2=0;
+counter3=0;
+round++;
+input.close();
+
+//deallocate heap memory
+    delete [] ptr;
+    delete [] ptr1;
+    delete [] ptr2;
+
+    ptr=0;
+    ptr1=0;
+    ptr2=0;
+
+
+}
+
+//deallocate heap memory
+    delete [] ptr;
+    delete [] ptr1;
+    delete [] ptr2;
+
+    ptr=0;
+    ptr1=0;
+    ptr2=0;
+
+return 0;
+}
+
+//function getChar that takes 8 bits at a time and returns the ascii equivalent back
+
+char getChar(int ar[]){
+    char letter;
+    string let;
+    int total=0;
+        for(int i=0;i<8;i++){
+            total+=ar[i]*pow(2,7-i);
+        }
+    letter=(char)total;
+return letter;
+}

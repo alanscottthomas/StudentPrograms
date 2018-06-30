@@ -1,0 +1,1 @@
+Copy an at least 15 line paragraph of your choice from any source and paste to a notepad file. Write a program in C++ to display in a tabular format the frequencies of each letter of the alphabet in that paragraph.
