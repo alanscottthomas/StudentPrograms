@@ -1,0 +1,94 @@
+
+
+
+
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+
+//BRUTE-FORCE//
+int main() {
+	ifstream input("cipher12.txt");
+	ofstream output("plaintext.txt");
+	string sentence;
+	int num1, num2;
+	int randnum1, randnum2, counter1 = 0, counter2 = 0, modnum;
+
+	char *ptr;
+	srand(time(0));
+	char letter;
+	char arr[] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+	int arr1[] = { 3,5,7,9,11,15,17 };
+	int arr2[] = { 9,21,15,3,19,7,23 };
+
+
+
+
+	while (getline(input, sentence)) {
+		while (sentence[counter1] != '\0') {
+			counter1++;
+		}
+	}
+
+	input.clear();
+	input.seekg(0, ios::beg);
+
+	ptr = new char[counter1];
+
+	while (getline(input, sentence)) {
+		while (sentence[counter2] != '\0') {
+			ptr[counter2] = sentence[counter2];
+
+			counter2++;
+		}
+	}
+
+	counter2 = 0;
+	int test = 0;
+
+
+	for (int j = 0; j < 7; j++)
+	{
+		for (int k = 0; k < 26; k++)
+		{
+
+			while (counter2 < counter1)
+			{
+				for (int i = 0; i < 26; i++)
+				{
+					if (toupper(ptr[counter2]) == toupper(arr[i]))
+					{
+						modnum = (i - k) % 26;
+						if (modnum < 0)
+						{
+							modnum += 26;
+						}
+						modnum = (modnum*arr2[j]) % 26;  //  cipher
+						ptr[counter2] = arr[modnum];
+
+						break;
+					}
+
+				}
+
+				output << ptr[counter2];
+				counter2++;
+
+
+			}
+			output << endl;
+			counter2 = 0;
+		}
+
+
+	}
+	input.close();
+	output.close();
+
+	return 0;
+
+}
