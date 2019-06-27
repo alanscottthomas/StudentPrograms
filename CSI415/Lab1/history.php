@@ -18,7 +18,7 @@ $ran=false;
 
 if(isset($_POST['submit'])){
 //connect to DB
-$mysqli =NEW MySQLi("localhost","root","password123","choochoo");
+$mysqli =NEW MySQLi("localhost","root","***********","choochoo");
 
 $search = $mysqli->real_escape_string($_POST['trainform']);
 
